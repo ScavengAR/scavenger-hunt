@@ -8,7 +8,7 @@ const ExitButton = ({ navigation }) => (
     name="cancel"
     raised
     size={25}
-    onPress={() => navigation.navigate('Main')}
+    onPress={() => navigation.navigate('Main')} // with navigation possible component wrapper usage here
   />
 );
 
