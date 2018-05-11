@@ -22,6 +22,7 @@ const Home = ({ navigation, currentUser, logoutFunc }) => (
       />
       <Text style={styles.iconText}>Play!</Text>
     </View>
+
     <View style={styles.iconContainer}>
       <View>
         <Ionicons
