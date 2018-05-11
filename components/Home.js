@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Text } from 'react-native-elements';
+import { Text, Button } from 'react-native-elements';
 import { EvilIcons, Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { logout } from '../store/auth';
@@ -16,11 +16,11 @@ const Home = ({ navigation, currentUser, logoutFunc }) => (
       </Text>
       <EvilIcons
         name="play"
-size={125}
-onPress={() => navigation.navigate('Game')}
-style={styles.icon}
-/>
-<Text style={styles.iconText}>Play!</Text>
+        size={125}
+        onPress={() => navigation.navigate('Game')}
+        style={styles.icon}
+      />
+      <Text style={styles.iconText}>Play!</Text>
       <Button
         title={currentUser.email ? 'Logout' : 'Login/Sign Up'}
         rounded
@@ -36,24 +36,23 @@ style={styles.icon}
       />
     </View>
 
-<View style={styles.iconContainer}>
-        <Ionicons
-          name="ios-clipboard-outline"
-          size={50}
-          onPress={() => navigation.navigate('Instructions')}
-          style={styles.icon}
-        />
-        <Text style={styles.iconText}>Tutorial</Text>
-      </View>
-      <View>
-        <EvilIcons
-          name="trophy"
-          size={60}
-          onPress={() => navigation.navigate('Leaderboard')}
-          style={styles.icon}
-        />
-        <Text style={styles.iconText}>Leaderboard</Text>
-      </View>
+    <View style={styles.iconContainer}>
+      <Ionicons
+        name="ios-clipboard-outline"
+        size={50}
+        onPress={() => navigation.navigate('Instructions')}
+        style={styles.icon}
+      />
+      <Text style={styles.iconText}>Tutorial</Text>
+    </View>
+    <View>
+      <EvilIcons
+        name="trophy"
+        size={60}
+        onPress={() => navigation.navigate('Leaderboard')}
+        style={styles.icon}
+      />
+      <Text style={styles.iconText}>Leaderboard</Text>
     </View>
   </View>
 );

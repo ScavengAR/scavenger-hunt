@@ -25,12 +25,12 @@ const RootNavigator = StackNavigator(
         headerTitle: 'Login'
       }
     },
-    Signup: {
-      screen: Signup,
-      navigationOptions: {
-        headerTitle: 'SignUp'
-      }
-    },
+    // Signup: {
+    //   screen: Signup,
+    //   navigationOptions: {
+    //     headerTitle: 'SignUp'
+    //   }
+    // },
     Instructions: {
       screen: TutorialNavigator,
       navigationOptions: {

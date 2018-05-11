@@ -99,7 +99,7 @@ class Login extends React.Component {
             color="white"
             title="New to Banana Hunt? Sign Up"
             onPress={() => {
-              this.props.navigation.navigate('Signup');
+              // this.props.navigation.navigate('Signup');
               this.setState({
                 email: '',
                 password: '',
