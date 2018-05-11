@@ -21,39 +21,36 @@ const Home = ({ navigation, currentUser, logoutFunc }) => (
         style={styles.icon}
       />
       <Text style={styles.iconText}>Play!</Text>
-      <Button
-        title={currentUser.email ? 'Logout' : 'Login/Sign Up'}
-        rounded
-        raised
-        style={{ width: 150, alignSelf: 'center' }}
-        backgroundColor="white"
-        color="gray"
-        onPress={() => {
-          return currentUser.email
-            ? logoutFunc(navigation)
-            : navigation.navigate('Login');
-        }}
-      />
     </View>
-
     <View style={styles.iconContainer}>
-      <Ionicons
-        name="ios-clipboard-outline"
-        size={50}
-        onPress={() => navigation.navigate('Instructions')}
-        style={styles.icon}
-      />
-      <Text style={styles.iconText}>Tutorial</Text>
+      <View>
+        <Ionicons
+          name="ios-clipboard-outline"
+          size={50}
+          onPress={() => navigation.navigate('Instructions')}
+          style={styles.icon}
+        />
+        <Text style={styles.iconText}>Tutorial</Text>
+      </View>
+      <View>
+        <EvilIcons
+          name="trophy"
+          size={60}
+          onPress={() => navigation.navigate('Leaderboard')}
+          style={styles.icon}
+        />
+        <Text style={styles.iconText}>Leaderboard</Text>
+      </View>
     </View>
-    <View>
-      <EvilIcons
-        name="trophy"
-        size={60}
-        onPress={() => navigation.navigate('Leaderboard')}
-        style={styles.icon}
-      />
-      <Text style={styles.iconText}>Leaderboard</Text>
-    </View>
+    <Text
+      onPress={() => {
+        return currentUser.email
+          ? logoutFunc(navigation)
+          : navigation.navigate('Login');
+      }}
+    >
+      Log In
+    </Text>
   </View>
 );
 
