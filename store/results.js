@@ -1,4 +1,5 @@
 import axios from 'axios';
+import domain from '../domain';
 
 // ACTION TYPES
 const FETCH_RESULTS = 'FETCH_RESULTS';
@@ -12,7 +13,7 @@ export const fetchResults = results => ({
 // THUNK CREATORS
 export const fetchResultsThunk = () => dispatch => {
   return axios
-    .get(`http://scavengar-hunt.herokuapp.com/api/results`)
+    .get(`${domain}/api/results`)
     .then(res => dispatch(fetchResults(res.data)))
     .catch(err => console.error(err));
 };
@@ -26,3 +27,5 @@ export default function(state = [], action) {
       return state;
   }
 }
+
+//There might be a way to configure axios to set a default domain

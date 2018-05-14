@@ -10,15 +10,16 @@ import Toolbar from './Toolbar';
 class Home extends React.Component {
   state = {
     loaded: false
-  }
+  };
 
   async componentDidMount() {
     await Font.loadAsync({
+      //Could potentially grab from native base
       'nanum-pen-script': require('../assets/NanumScript.ttf'),
       'opensans-light': require('../assets/OpenSans-Light.ttf')
     });
     this.setState({ loaded: true });
-  };
+  }
 
   render() {
     const { navigation, currentUser, logoutFunc } = this.props;
@@ -28,40 +29,35 @@ class Home extends React.Component {
         <Image
           style={styles.bgImage}
           source={require('../assets/home-bg.png')}
-          />
-        {
-          this.state.loaded ? (
-            <Text style={styles.headerText}>Banana Hunt</Text>
-          ) : null
-        }
-        <Image
-            style={styles.logo}
-            source={require('../assets/logo.png')}
-          />
+        />
+        {this.state.loaded ? (
+          <Text style={styles.headerText}>Banana Hunt</Text>
+        ) : null}
+        <Image style={styles.logo} source={require('../assets/logo.png')} />
         <FontAwesome
           name="play-circle"
           size={120}
           onPress={() => navigation.navigate('GameOptionPage')}
           style={styles.icon}
         />
-        {
-          this.state.loaded ? (
-            <Text
-              style={styles.loginText}
-              onPress={() => {
-                return currentUser.email
-                  ? logoutFunc(navigation)
-                  : navigation.navigate('Login');
-              }}
-            >
-              {currentUser && currentUser.email ? 'null' : 'Login'}
-            </Text>
-          ) : null
-        }
+        {this.state.loaded ? (
+          <Text
+            //Alternative {...styles.loginText, color: 'blue' }
+            //Also consider making a function and then feeding arguments for nuances in styling
+            style={styles.loginText}
+            onPress={() => {
+              return currentUser.email
+                ? logoutFunc(navigation)
+                : navigation.navigate('Login');
+            }}
+          >
+            {currentUser && currentUser.email ? 'null' : 'Login'}
+          </Text>
+        ) : null}
 
         <Toolbar />
       </View>
-    )
+    );
   }
 }
 
@@ -87,7 +83,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: 200,
-    height: 200,
+    height: 200
   },
   headerText: {
     fontFamily: 'nanum-pen-script',

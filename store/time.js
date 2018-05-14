@@ -14,9 +14,10 @@ export const resetTime = () => ({ type: RESET_TIME });
 
 // THUNK CREATORS
 export const postResult = (name, time) => dispatch => {
+  //potentially use a second arg getState and then use getState().time
   return axios
     .post(`http://scavengar-hunt.herokuapp.com/api/results`, { name, time })
-    .then(res => dispatch(resetTime()))
+    .then(res => dispatch(resetTime())) //consider making two dispatch
     .then(() => dispatch(fetchResultsThunk()))
     .catch(err => console.error(err));
 };
@@ -32,3 +33,6 @@ export default function(state = defaultTime, action) {
       return state;
   }
 }
+
+//create gameEnd action type in a separate file
+//two different reducers can handle the same action

@@ -32,3 +32,8 @@ export * from './time';
 export * from './capturedItems';
 export * from './users';
 export * from './customMaps';
+
+//All game logic should be in redux
+//Then moving redux store to the back-end
+//This allows us to correctly do permissions and validate user actions, so there's no cheating.
+//Will need sockets.io to emit for every user action

@@ -58,3 +58,24 @@ export function setUserAndRedirect(user, navigation, dispatch) {
   dispatch(setCurrentUser(user));
   navigation.navigate('GameOptionPage');
 }
+
+/*
+To add async storage
+Is key enough?
+
+Session id needs to be connected to logged in user.
+Key works for the front end but there isn't a user logged in in the backend.
+
+Async storage is not secure so you dont want session.id on it?
+Realm?
+
+Why session id instead of user id?
+session id is generally public
+We don't normally get it normally in react.
+User id is stored in a cookie and its automatically sent.
+Front end doesnt send cookies. Instead, consider JSON web tokens.
+1) Don't use express.session as is, use jSON web tokens instead *** best bet
+2) Cookie plugin for react native?
+3) Figure out a way for express sessions to work without cookies. Then find a way to send cookie.
+
+*/

@@ -15,10 +15,11 @@ import { incrementItems, resetItems } from '../store';
 import ExitButton from './ExitButton';
 import Timer from './Timer';
 import ResultSubmitForm from './ResultSubmitForm';
+//seems like global configurations, consider a global config file
 console.disableYellowBox = true;
 // Turn off three.js warnings...
-const originalWarn = console.warn.bind( console )
-console.warn = (text) => !text.includes('THREE') && originalWarn(text);
+const originalWarn = console.warn.bind(console);
+console.warn = text => !text.includes('THREE') && originalWarn(text); //toggle this off to see effect
 
 const capturedItemMaterial = new THREE.MeshBasicMaterial({ color: 0xcccccc });
 
@@ -27,7 +28,7 @@ class Game extends React.Component {
     super(props);
     this.state = {
       itemInSight: null,
-      isGameOver: false
+      isGameOver: false //consider putting this in store, b/c other components may care that the game ended
     };
     this.gameItems = [];
     this.itemsNum = 2;
@@ -48,13 +49,13 @@ class Game extends React.Component {
   }
 
   handlePress = () => {
-    const currentCube = this.gameItems[this.state.itemInSight]
+    const currentCube = this.gameItems[this.state.itemInSight];
     // User captures an item, stop item from animating and turn its color to gray
     currentCube.speed = 0;
     currentCube.material = capturedItemMaterial;
 
     // capturedItems increments by 1
-    if ( !currentCube.captured ) {
+    if (!currentCube.captured) {
       this.props.incrementItems(this.props.capturedItems);
       currentCube.captured = true;
     }
@@ -141,16 +142,26 @@ class Game extends React.Component {
           onContextCreate={this._onGLContextCreate}
         />
         <View style={styles.timer}>
-          <Timer isGameOver={this.state.isGameOver} capturedItems={this.props.capturedItems} itemsNum={this.itemsNum}/>
+          <Timer
+            isGameOver={this.state.isGameOver}
+            capturedItems={this.props.capturedItems}
+            itemsNum={this.itemsNum}
+          />
         </View>
         <View style={styles.exitButton}>
           <ExitButton />
         </View>
         <View style={styles.overlay}>
-          { this.state.itemInSight !== null && !this.gameItems[this.state.itemInSight].captured ?
-            (<Button raised rounded title="Capture" onPress={this.handlePress} buttonStyle={{ width: 150 }} />)
-            : null
-          }
+          {this.state.itemInSight !== null &&
+            !this.gameItems[this.state.itemInSight].captured && (
+              <Button
+                raised
+                rounded
+                title="Capture"
+                onPress={this.handlePress}
+                buttonStyle={{ width: 150 }}
+              />
+            )}
         </View>
         <ResultSubmitForm isGameOver={this.state.isGameOver} />
       </View>
@@ -168,6 +179,7 @@ const styles = StyleSheet.create({
     left: width / 2 - 75
   },
   timer: {
+    //consider moving this styling into Timer.js
     position: 'absolute',
     top: 20,
     left: 20
@@ -185,6 +197,7 @@ const styles = StyleSheet.create({
 });
 
 function generateItems(scene, items, num) {
+  //consider making items an empty array then concat ....
   // Creating items
   const geometry = new THREE.BoxGeometry(0.07, 0.07, 0.07); // creates template for a cube
   const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 }); // creates color for a cube
@@ -197,20 +210,19 @@ function generateItems(scene, items, num) {
   for (let i = 0; i < num; i++) {
     const cube = new THREE.Mesh(geometry, material);
     randomizePosition(cube);
-    cube.position.z = randomizePosition(1);  // (-5, 5) meters
-    cube.position.x = randomizePosition(1);  // (-5, 5) meters
+    cube.position.z = randomizePosition(1); // (-5, 5) meters
+    cube.position.x = randomizePosition(1); // (-5, 5) meters
     cube.position.y = randomizePosition(1); // (-0.5, 0.5) meters
-    cube.speed = 0.05
+    cube.speed = 0.05;
     cube.captured = false;
-    scene.add(cube);
+    scene.add(cube); //consider taking this out so this fn can be abstracted away as a helper fn
     items.push(cube);
   }
 }
 
-
 const mapState = state => {
-  return { capturedItems: state.capturedItems }
-}
+  return { capturedItems: state.capturedItems };
+};
 
 const mapDispatch = dispatch => {
   return {
@@ -220,7 +232,7 @@ const mapDispatch = dispatch => {
     resetItems() {
       dispatch(resetItems());
     }
-  }
-}
+  };
+};
 
 export default connect(mapState, mapDispatch)(Game);
