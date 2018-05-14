@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { TabNavigator } from 'react-navigation';
-import TutorialStep from './TutorialStep';
+import TutorialStep from '../TutorialStep';
 import { Ionicons } from '@expo/vector-icons';
 
 const TutorialNavigator = TabNavigator(
@@ -15,34 +15,25 @@ const TutorialNavigator = TabNavigator(
           desc={`This is a simulated scavenger hunt, but with Augmented Reality!`}
           iconName={'ios-phone-portrait'}
         />
-      ),
-      navigationOptions: {
-        headerTitle: 'Game Overview'
-      }
+      )
     },
     TutorialStepTwo: {
       screen: () => (
         <TutorialStep
           title={'How to Play'}
-          desc={`Items will randomly drop all around you. Once you are within reach of an item, a "capture" button will appear!`}
+          desc={`Bananas will randomly drop all around you. Once you are within reach of one, a "capture" button will appear!`}
           iconName={'ios-basket-outline'}
         />
-      ),
-      navigationOptions: {
-        headerTitle: 'How to Play'
-      }
+      )
     },
     TutorialStepThree: {
       screen: () => (
         <TutorialStep
           title={'Mission'}
-          desc={`Your task is to capture the items as quickly as possible. Get ready to search!`}
+          desc={`Your task is to capture the bananas as quickly as possible. Get ready to search!`}
           iconName={'ios-alarm-outline'}
         />
-      ),
-      navigationOptions: {
-        headerTitle: 'Mission'
-      }
+      )
     }
   },
   {

@@ -1,10 +1,17 @@
-import React, {Component} from 'react';
-import {Modal, Text, View, StyleSheet, Dimensions, TextInput} from 'react-native';
+import React, { Component } from 'react';
+import {
+  Modal,
+  Text,
+  View,
+  StyleSheet,
+  Dimensions,
+  TextInput
+} from 'react-native';
 import { Button } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
 import { postResult } from '../store';
-import { convertToTime } from '../utils/util.js';
+import { convertToTime } from '../utils';
 
 class ResultSubmitForm extends Component {
   state = {
@@ -13,12 +20,12 @@ class ResultSubmitForm extends Component {
   };
 
   setModalVisible = visible => {
-    this.setState({modalVisible: visible});
-  }
+    this.setState({ modalVisible: visible });
+  };
 
   static getDerivedStateFromProps(nextProps) {
     if (nextProps.isGameOver) {
-      return {modalVisible: true};
+      return { modalVisible: true };
     }
     return null;
   }
@@ -36,7 +43,8 @@ class ResultSubmitForm extends Component {
           visible={this.state.modalVisible}
           onRequestClose={() => {
             alert('Modal has been closed.');
-          }}>
+          }}
+        >
           <View style={styles.container}>
             <View style={styles.modal}>
               <Text style={styles.text}>Your Time:</Text>
@@ -46,24 +54,32 @@ class ResultSubmitForm extends Component {
               <TextInput
                 style={styles.textInput}
                 placeholder="Your name here..."
-                onChangeText={(name) => this.setState({name})}
+                onChangeText={name => this.setState({ name })}
               />
               <Button
-                raised rounded title="Submit"
-                backgroundColor="white" color="black"
+                raised
+                rounded
+                title="Submit"
+                backgroundColor="white"
+                color="black"
                 buttonStyle={styles.button}
                 onPress={() => {
-                  this.props.postResult(this.state.name, this.props.time)
+                  this.props.postResult(this.state.name, this.props.time);
                   this.props.navigation.replace('Leaderboard');
-                }} />
+                }}
+              />
               <Button
-                raised rounded title="Cancel"
-                backgroundColor="white" color="black"
+                raised
+                rounded
+                title="Cancel"
+                backgroundColor="white"
+                color="black"
                 buttonStyle={styles.button}
                 onPress={() => {
                   this.setModalVisible(false);
-                  this.props.navigation.popToTop()
-                }} />
+                  this.props.navigation.popToTop();
+                }}
+              />
             </View>
           </View>
         </Modal>
@@ -72,7 +88,7 @@ class ResultSubmitForm extends Component {
   }
 }
 
-const {height, width} = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -117,7 +133,7 @@ const mapDispatch = dispatch => {
     postResult(name, time) {
       dispatch(postResult(name, time));
     }
-  }
-}
+  };
+};
 
 export default connect(mapState, mapDispatch)(withNavigation(ResultSubmitForm));
